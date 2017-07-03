@@ -20,7 +20,8 @@ const hotStuff = new HotStuff(element);
 
 // You can also attach to the window 
 const hotStuff = new HotStuff(window);
-const hotStuff = new HotStuff(); // by default HotStuff attaches itself to the window object if there is one
+// by default HotStuff attaches itself to the window object if there is one
+const hotStuff = new HotStuff();
 ```
 From this point you can add hotkeys using the new `hotStuff` object using the `hotStuff.addListener` method. Both functions are optional (so if you want to just add a key up function, you can by passing null as the second argument)
 

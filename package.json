@@ -1,8 +1,8 @@
 {
   "name": "hotstuff",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Small Package to provide add Hotkeys easily to any element",
-  "main": "index.js",
+  "main": "dist/HotStuff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
