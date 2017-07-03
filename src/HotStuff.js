@@ -151,7 +151,7 @@
             this._keyListeners = {};
             this._keysActive = [];
             this._unresolvedKeyUps = [];
-            this._allKeyListeners = [];
+            this._genericKeyListeners = [];
 
             el.addEventListener("keydown", this.handleKeyDown.bind(this));
             el.addEventListener("keyup", this.handleKeyUp.bind(this));
@@ -172,6 +172,7 @@
                 keysArr = []; // pass an empty array, we'll detect the length of this later to determine type of listener
             }
 
+
             if (!(keysArr instanceof Array)) throw new Error("Invalid Keys provided");
 
             if (keyupHandler == null && keydownHandler == null)
@@ -188,10 +189,12 @@
                 keyupHandler = keyupHandler.bind(this);
                 this._allKeyListeners.push({
                     keyDown: e => {
+                        // we need to cache a copy of the active keys at the time of the keyDown event
+                        // as when keyUp is triggered the keysActive can be different. We can possibly fiddle with the
+                        // handleKeyDown method to fix this, but one way or another, we should make a separate copy
+                        // from the one that's sent to keydownHandler as we want to make sure its untampered with.
                         keyActiveBuffer = this._keysActive.slice();
-                        let kdh =  keydownHandler(e, sharedStore, this._keysActive.slice());
-                        console.log(kdh);
-                        return kdh;
+                        return keydownHandler(e, sharedStore, this._keysActive.slice());
                     },
                     keyUp: e => keyupHandler(e, sharedStore, keyActiveBuffer)
                 });
@@ -210,10 +213,6 @@
 
                 addKeyListener(this, keys.join("+")).push({
                     keyDown: e => {
-                        // we need to cache a copy of the active keys at the time of the keyDown event
-                        // as when keyUp is triggered the keysActive can be different. We can possibly fiddle with the
-                        // handleKeyDown method to fix this, but one way or another, we should make a separate copy
-                        // from the one that's sent to keydownHandler as we want to make sure its untampered with.
                         keyActiveBuffer = this._keysActive.slice();
                         return keydownHandler(e, sharedStore, this._keysActive.slice());
                     },

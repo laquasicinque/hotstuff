@@ -58,7 +58,7 @@ hotStuff.addListener(['f5','ctrl+r','ctrl+shift+r'],function(e,store){
 });
 ```
 
-There may be times where you don't want your keyup function to trigger, whilst this is possible with the store, you can also achieve this by making your keydown function return false.
+There may be times where you don't want your keyup function to trigger, whilst this is possible to achieve with the store, you can also achieve this by making your keydown function return false.
 ```javascript
 // sidenote: the arrow keys can either be referred to by using
 // arrow<direction> or just <direction>
@@ -73,4 +73,44 @@ hotStuff.addListener(['up','left','arrowdown','arrowright'],function(e){
 });
 ```
 
+Finally, if you want to attach a key listener to all keys, you can by only passing the functions to the method
+```javascript
+hotStuff.addListener(function(e,store,keys){
+    console.log(keys);
+},function(e,store,keys){
+    console.log(keys);
+})
+```
 
+## Examples
+
+### Debounce
+```javascript
+// console.log will only be triggered once per keypress
+hotStuff.addListener('space',(e,store)=>{
+  e.preventDefault();
+  if(!store.debounce){
+    store.debounce = true;
+    console.log("Example of a debounce.");
+  }
+},(e,store)=>{
+  store.debounce = false;
+});
+
+// example of a debounce with a 1 second time limit between keypresses
+hotStuff.addListener('backspace',(e,store)=>{
+  e.preventDefault();
+  let now = performance ? performance.now() : Date.now();
+  if(!store.debounce || now - store.debounce > 1000){
+    store.debounce = now;
+    console.log("Example of a debounce over time.");
+  }
+},(e,store)=>{
+  // uncomment this line to allow backspace to only be debounced on keydown
+  // store.debounce = false;
+});
+```
+
+## Todo
+- Add tests
+- Add possibility of "looser hotkeys" (perhaps regex)

@@ -13,7 +13,7 @@ gulp.task('lint', function () {
         .pipe(eslint.failOnError());
 });
 
-gulp.task('uglify', function (cb) {
+gulp.task('uglify', function () {
     return pump([
         gulp.src(['./src/**/*.js'])
             .pipe(babel({
