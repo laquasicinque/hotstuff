@@ -1,6 +1,6 @@
 {
   "name": "hotstuff",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Small Package to provide add Hotkeys easily to any element",
   "main": "index.js",
   "scripts": {
