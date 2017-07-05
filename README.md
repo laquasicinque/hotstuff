@@ -111,7 +111,3 @@ hotStuff.addListener('backspace',(e,store)=>{
   // store.debounce = false;
 });
 ```
-
-## Todo
-- Add tests
-- Add possibility of "looser hotkeys" (perhaps regex)

@@ -1,7 +1,7 @@
 {
   "name": "hotstuff",
-  "version": "0.0.3",
-  "description": "Small Package to provide add Hotkeys easily to any element",
+  "version": "0.0.4",
+  "description": "A small package to provide an easy way to add Hotkeys easily to any element.",
   "main": "dist/HotStuff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,6 +28,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^4.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
     "pump": "^1.0.2"
   }
