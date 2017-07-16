@@ -189,8 +189,10 @@
             el.addEventListener("keydown", this.handleKeyDown.bind(this));
             el.addEventListener("keyup", this.handleKeyUp.bind(this));
 
-            // when the window loses focus, trigger all key up events
-            window.addEventListener("blur", () => {
+            // when the window loses or gains focus, trigger all key up events that haven't been triggered
+            (function (arr, func) {
+                arr.forEach(x => window.addEventListener(x, func));
+            })(['blur', 'focus'], () => {
                 this._unresolvedKeyUps.forEach(listenerGroup => {
                     createFakeEvent(
                         listenerGroup._events[listenerGroup._events.length - 1],

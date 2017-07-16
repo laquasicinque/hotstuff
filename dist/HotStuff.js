@@ -193,8 +193,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             el.addEventListener("keydown", this.handleKeyDown.bind(this));
             el.addEventListener("keyup", this.handleKeyUp.bind(this));
 
-            // when the window loses focus, trigger all key up events
-            window.addEventListener("blur", function () {
+            // when the window loses or gains focus, trigger all key up events that haven't been triggered
+            (function (arr, func) {
+                arr.forEach(function (x) {
+                    return window.addEventListener(x, func);
+                });
+            })(['blur', 'focus'], function () {
                 _this._unresolvedKeyUps.forEach(function (listenerGroup) {
                     createFakeEvent(listenerGroup._events[listenerGroup._events.length - 1], _this.el);
                     listenerGroup._events.splice();

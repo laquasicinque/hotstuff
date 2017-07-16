@@ -1,8 +1,17 @@
 {
   "name": "hotstuff",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A small package to provide an easy way to add Hotkeys easily to any element.",
   "main": "dist/HotStuff.js",
+  "keywords" : [
+    "keyboard",
+    "events",
+    "keyboard events",
+    "hotkeys",
+    "hotkey",
+    "es2015",
+    "shortcuts"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
