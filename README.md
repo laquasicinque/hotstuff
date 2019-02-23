@@ -8,19 +8,22 @@ npm install hotstuff
 ```
 
 ## Usage
-The preferred method of pulling HotStuff into your project is using NPM and a CommonJS module system.
+The preferred method of pulling HotStuff into your project is using NPM. You can use either the CommonJS `require` or module `import` syntax.
 
 ```javascript
 const HotStuff = require('hotstuff')
+// or
+import HotStuff from 'hotstuff'
 ```
+
 You can then create a new HotStuff object using one of the methods below.
-Note: HotStuff attaches events using addEventListener on both the keydown and keyup events so the object you pass to HotStuff must support those events. 
+Note: HotStuff attaches events using addEventListener on both the keydown and keyup events so the object you pass to HotStuff must support those events.
 
 ```javascript
 const element = document.getElementById('elem')
 const hotStuff = new HotStuff(element)
 
-// You can also attach to the window 
+// You can also attach to the window
 const hotStuff = new HotStuff(window)
 // by default HotStuff attaches itself to the window object if there is one
 const hotStuff = new HotStuff()
