@@ -15,43 +15,37 @@ import typescript from 'rollup-plugin-typescript2'
 // umd – Universal Module Definition, works as amd, cjs and iife all in one
 // system – Native format of the SystemJS loader
 
-// ------------------------------------------------------------------------------------------
-// setup
-// ------------------------------------------------------------------------------------------
 const pkg = require('../package.json')
-const name = pkg.name
-const className = name.replace(/(^\w|-\w)/g, c => c.replace('-', '').toUpperCase())
-const external = Object.keys(pkg.dependencies || [])
-const plugins = [
-  typescript({useTsconfigDeclarationDir: true}),
-]
-
-// ------------------------------------------------------------------------------------------
-// Builds
-// ------------------------------------------------------------------------------------------
-function defaults (config) {
-  // defaults
-  const defaults = {
-    plugins,
-    external
-  }
-  // defaults.output
-  config.output = config.output.map(output => {
-    return Object.assign({
-      sourcemap: false,
-      name: className,
-      exports: 'named',
-    }, output)
-  })
-  return Object.assign(defaults, config)
-}
 
 export default [
-  defaults({
+  // CJS
+  {
     input: 'src/index.ts',
-    output: [
-      {file: 'dist/index.cjs.js', format: 'cjs'},
-      {file: 'dist/index.esm.js', format: 'esm'},
+    plugins: [
+      typescript({useTsconfigDeclarationDir: true}),
     ],
-  }),
+    external: Object.keys(pkg.dependencies || []),
+    output: {
+      file: 'dist/index.cjs.js',
+      format: 'cjs',
+      sourcemap: false,
+      name: 'Hotstuff',
+      exports: 'named',
+    }
+  },
+  // ESM
+  {
+    input: 'src/index.ts',
+    plugins: [
+      typescript({useTsconfigDeclarationDir: true}),
+    ],
+    external: Object.keys(pkg.dependencies || []),
+    output: {
+      file: 'dist/index.esm.js',
+      format: 'esm',
+      sourcemap: false,
+      name: 'Hotstuff',
+      exports: 'named',
+    }
+  }
 ]
