@@ -2,7 +2,7 @@
 
 // npm install rollup-plugin-typescript2 typescript --save-dev
 import typescript from 'rollup-plugin-typescript2'
-// import { terser } from 'rollup-plugin-terser'
+import { terser } from 'rollup-plugin-terser'
 // import resolve from 'rollup-plugin-node-resolve'
 
 // ------------------------------------------------------------------------------------------
@@ -42,6 +42,38 @@ export default [
     external: Object.keys(pkg.dependencies || []),
     output: {
       file: 'dist/index.esm.js',
+      format: 'esm',
+      sourcemap: false,
+      name: 'Hotstuff',
+      exports: 'named',
+    }
+  },
+  // CJS minified
+  {
+    input: 'src/index.ts',
+    plugins: [
+      typescript({useTsconfigDeclarationDir: true}),
+      terser()
+    ],
+    external: Object.keys(pkg.dependencies || []),
+    output: {
+      file: 'dist/index.cjs.min.js',
+      format: 'cjs',
+      sourcemap: false,
+      name: 'Hotstuff',
+      exports: 'named',
+    }
+  },
+  // ESM minified
+  {
+    input: 'src/index.ts',
+    plugins: [
+      typescript({useTsconfigDeclarationDir: true}),
+      terser()
+    ],
+    external: Object.keys(pkg.dependencies || []),
+    output: {
+      file: 'dist/index.esm.min.js',
       format: 'esm',
       sourcemap: false,
       name: 'Hotstuff',
